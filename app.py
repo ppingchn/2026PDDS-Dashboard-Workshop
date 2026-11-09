@@ -27,8 +27,8 @@ fig = px.bar(
     title = "Daily Peak Hours: Walk-in vs. Foodpanda",
     labels = {
         "hour_of_day": "Hour of Day",
-        "total_orders": "Total Orders",
-        "channel": "Channel"
+        "total_order": "Total Orders",
+        "channel": "Sales Channel"
     },
     color_discrete_map = {
         "Walk-in": "#2E7D32",
@@ -37,36 +37,93 @@ fig = px.bar(
 )
 
 fig.update_layout(
-    xaxis_tickangle = -45,
-    plot_bgcolor = "white",
-    hovermode = "x unified"
+    font={"family": "Segoe UI, Arial, sans-serif", "color": "#1E293B"},
+    title_font={"size": 18, "weight": "bold"},
+    plot_bgcolor="white",
+    paper_bgcolor="white",
+    hovermode="x unified",
+    margin={"t": 60, "r": 20, "b": 40, "l": 40},
+    legend={
+        "orientation": "h",
+        "yanchor": "bottom",
+        "y": 1.02,
+        "xanchor": "right",
+        "x": 1,
+        "title_text": ""
+    },
+    xaxis={
+        "tickangle": 0,
+        "showline": True,
+        "linecolor": "#E2E8F0"
+    },
+    yaxis={
+        "showgrid": True,
+        "gridcolor": "#F1F5F9",
+        "zeroline": False
+    }
 )
+
+fig.update_traces(marker_line_width=0, opacity=0.92)
 
 # App Layout
 app.layout = html.Div(
     style = {
-        "fontFamily": "Arial, sans-serif",
-        "maxWidth": "900px",
-        "margin": "0 auto",
-        "padding": "20px"
+        "backgroundColor": "#F8FAFC",
+        "minHeight": "100vh",
+        "padding": "40px 20px",
+        "fontFamily": "'Segoe UI', Roboto, Arial, sans-serif",
+        "color": "#0F172A"
     },
     children = [
-        html.H1(
-            "Bubble Tea Store Analytics",
+        # Main Container
+        html.Div(
             style = {
-                "textAlign": "center"
-            }
-        ),
-        html.P(
-            "Comparing Walk-in vs. Foodpanda Rush Hours for Shift Scheduling",
-            style = {
-                "textAlign" : "center",
-                "color": "#666"
-            }
-        ),
-        dcc.Graph(
-            id = "rush-hours-graph",
-            figure = fig
+                "maxWidth": "960px",
+                "margin": "0 auto"
+            },
+            children = [
+                # Header Section
+                html.Div(
+                    style={"marginBottom": "24px"},
+                    children=[
+                        html.H1(
+                            "Bubble Tea Store Analytics",
+                            style={
+                                "fontSize": "28px",
+                                "fontWeight": "700",
+                                "margin": "0 0 6px 0",
+                                "color": "#0F172A"
+                            }
+                        ),
+                        html.P(
+                            "Comparing Walk-in vs. Foodpanda rush hours for shift scheduling",
+                            style={
+                                "fontSize": "15px",
+                                "color": "#64748B",
+                                "margin": "0"
+                            }
+                        )
+                    ]
+                ),
+
+                # Chart Card
+                html.Div(
+                    style={
+                        "backgroundColor": "#FFFFFF",
+                        "borderRadius": "12px",
+                        "padding": "24px",
+                        "boxShadow": "0 1px 3px rgba(0, 0, 0, 0.08)",
+                        "border": "1px solid #E2E8F0"
+                    },
+                    children=[
+                        dcc.Graph(
+                            id="rush-hours-graph",
+                            figure=fig,
+                            config={"displayModeBar": False}
+                        )
+                    ]
+                )
+            ]
         )
     ]
 )
