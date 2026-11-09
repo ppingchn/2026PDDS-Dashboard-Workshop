@@ -18,6 +18,19 @@ df = get_rush_hours_data()
 TODO: Create a chart that show volume of each channel in each hour
 """
 
+fig = px.bar(
+    df,
+    x = "hour_of_day",
+    y = "total_orders",
+    color = "channel",
+    barmode = "group",
+    title = "Daily Peak Hours: Walk-in vs. Foodpanda",
+    labels = {
+        "hour_of_day": "Hour of Day",
+        "total_orders": "Total Orders",
+        "channel": "Channel"
+    }
+)
 
 # App Layout
 app.layout = html.Div(
