@@ -13,7 +13,13 @@ DB_PATH = os.path.join(BASE_DIR, "BubbleTeaDB_2026.db")
 def get_rush_hours_data() -> pd.DataFrame:
     # Code your query here
     query = """
-
+        SELECT
+            strftime('%H:00', order_time) AS hour_of_day,
+            channel,
+            COUNT(order_id) AS total_order
+        FROM Orders
+        GROUP BY __ , __
+        ORDER BY __;
     """
 
     with sqlite3.connect(DB_PATH) as conn:
