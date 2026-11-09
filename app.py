@@ -29,7 +29,17 @@ fig = px.bar(
         "hour_of_day": "Hour of Day",
         "total_orders": "Total Orders",
         "channel": "Channel"
+    },
+    color_discrete_map = {
+        "Walk-in": "#2E7D32",
+        "Foodpanda": "#D81B60"
     }
+)
+
+fig.update_layout(
+    xaxis_tickangle = -45,
+    plot_bgcolor = "white",
+    hovermode = "x unified"
 )
 
 # App Layout
