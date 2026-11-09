@@ -21,7 +21,7 @@ TODO: Create a chart that show volume of each channel in each hour
 fig = px.bar(
     df,
     x = "hour_of_day",
-    y = "total_orders",
+    y = "total_order",
     color = "channel",
     barmode = "group",
     title = "Daily Peak Hours: Walk-in vs. Foodpanda",
@@ -44,7 +44,31 @@ fig.update_layout(
 
 # App Layout
 app.layout = html.Div(
-
+    style = {
+        "fontFamily": "Arial, sans-serif",
+        "maxWidth": "900px",
+        "margin": "0 auto",
+        "padding": "20px"
+    },
+    children = [
+        html.H1(
+            "Bubble Tea Store Analytics",
+            style = {
+                "textAlign": "center"
+            }
+        ),
+        html.P(
+            "Comparing Walk-in vs. Foodpanda Rush Hours for Shift Scheduling",
+            style = {
+                "textAlign" : "center",
+                "color": "#666"
+            }
+        ),
+        dcc.Graph(
+            id = "rush-hours-graph",
+            figure = fig
+        )
+    ]
 )
 
 if __name__ == "__main__":
