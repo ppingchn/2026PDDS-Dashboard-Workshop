@@ -18,8 +18,8 @@ def get_rush_hours_data() -> pd.DataFrame:
             channel,
             COUNT(order_id) AS total_order
         FROM Orders
-        GROUP BY __ , __
-        ORDER BY __;
+        GROUP BY hour_of_day , channel
+        ORDER BY hour_of_day ASC;
     """
 
     with sqlite3.connect(DB_PATH) as conn:
